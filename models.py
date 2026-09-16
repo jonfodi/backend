@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, Enum
 from database import Base
-import enum
+from enum import Enum as PyEnum
 
 
-class SpecialtyEnum(enum.Enum):
+class SpecialtyEnum(str, PyEnum):
     eating_disorder = "eating_disorder"
     athlete = "athlete"
     weight_loss = "weight_loss"

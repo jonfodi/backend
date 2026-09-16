@@ -1,11 +1,5 @@
 from pydantic import BaseModel
-from enum import Enum
-
-
-class SpecialtyEnum(str, Enum):
-    eating_disorder = "eating_disorder"
-    athlete = "athlete"
-    weight_loss = "weight_loss"
+from models import SpecialtyEnum
 
 
 class DietitianResponse(BaseModel):

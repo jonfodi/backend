@@ -12,10 +12,13 @@ app = FastAPI()
 def read_root():
     return {"message": "Hello, World!"}
 
-@app.get("/dietitians")
-def get_dietitians(db: Session = Depends(get_db)):
-    return db.query(models.Dietitian).all()
-
+@app.get("/dietitians", response_model=list[schemas.DietitianResponse])
+def get_dietitians(specialty: schemas.SpecialtyEnum = None, db: Session = Depends(get_db)):
+    query = db.query(models.Dietitian)
+    if specialty:
+        query = query.filter(models.Dietitian.specialty == specialty)
+    return query.all()
+  
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
